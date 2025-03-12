@@ -2585,3 +2585,24 @@ h1,  h2,  h3,  h4,  h5,  h6{
   }
 }
 
+/* CUSTOM MASSIMO */
+
+.ro {
+  margin-top: -41px !important;
+}
+
+h2.ek.vj.\32 xl\:ud-text-title-lg.kk.wm.nb.gb {
+  color: #0080c3;
+  font-weight: 100;
+}
+
+a.xl.tc.wf.yf.bg.mk {
+  background-color: #0080c3;
+  color: white !important;
+  padding: 6px 10px !important;
+  border-radius: 7px;
+}
+
+a.xl:hover {
+  color: black !important;
+}

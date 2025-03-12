@@ -23,8 +23,8 @@
   <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
     <div class="vd to/4 tc wf yf">
       <a href="index.html">
-        <img class="om" src="{{asset('images/logo-light.svg')}}" alt="Logo Light" />
-        <img class="xc nm" src="{{asset('images/logo-dark.svg')}}" alt="Logo Dark" />
+        <img class="om" src="{{asset('images/logo.png')}}" alt="Logo Light" width="130px"/>
+        <img class="xc nm" src="{{asset('images/logo.png')}}" alt="Logo Dark" width="130px"/>
       </a>
 
       <!-- Hamburger Toggle BTN -->
@@ -50,35 +50,11 @@
     >
       <nav>
         <ul class="tc _o sf yo cg ep">
-          <li><a href="/" class="xl" :class="{ 'mk': page === 'home' }">Home</a></li>
-          <li><a href="index.html#features" class="xl">Features</a></li>
-          <li class="c i" x-data="{ dropdown: false }">
-            <a
-              href="#"
-              class="xl tc wf yf bg"
-              @click.prevent="dropdown = !dropdown"
-              :class="{ 'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' || page === 'signup' || page === '404' }"
-            >
-              Pages
-
-              <svg
-              :class="{ 'wh': dropdown }"
-              class="th mm we fd pf" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-              </svg>
-            </a>
-
-            <!-- Dropdown Start -->
-            <ul class="a" :class="{ 'tc': dropdown }">
-              <li><a href="blog-grid.html" class="xl" :class="{ 'mk': page === 'blog-grid' }">Blog Grid</a></li>
-              <li><a href="blog-single.html" class="xl" :class="{ 'mk': page === 'blog-single' }">Blog Single</a></li>
-              <li><a href="signin.html" class="xl" :class="{ 'mk': page === 'signin' }">Sign In</a></li>
-              <li><a href="signup.html" class="xl" :class="{ 'mk': page === 'signup' }">Sign Up</a></li>
-              <li><a href="404.html" class="xl" :class="{ 'mk': page === '404' }">404</a></li>
-            </ul>
-            <!-- Dropdown End -->
-          </li>
-          <li><a href="index.html#support" class="xl">Support</a></li>
+          <li><a href="/" class="xl">Welkom</a></li>
+          <li><a href="/about" class="xl {{ Request::path() === 'about' ? 'tc wf yf bg mk' : '' }}">Over ons</a></li>
+           <li><a href="/cities" class="xl {{ Request::path() === 'cities' ? 'tc wf yf bg mk' : '' }}">Epische steden</a></li>
+          <li><a href="/themedays" class="xl {{ Request::path() === 'themedays' ? 'tc wf yf bg mk' : '' }}">Themadagen</a></li>
+          <li><a href="/contact" class="xl {{ Request::path() === 'contact' ? 'tc wf yf bg mk' : '' }}">Contacteer ons</a></li>
         </ul>
       </nav>
 

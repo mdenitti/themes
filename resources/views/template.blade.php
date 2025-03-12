@@ -17,7 +17,7 @@
 
                 <ul class="tc wf bg sb">
                   <li>
-                    <p class="sj kk wm tb">Share On:</p>
+                    <p class="sj kk wm tb">Wees sociaal:</p>
                   </li>
                   <li>
                     <a href="#" class="tc wf xf yd ad rg ml il ih wk">
@@ -109,29 +109,21 @@
               </div>
 
               <div class="animate_top fb">
-                <h4 class="tj kk wm qb">Categories</h4>
+                <h4 class="tj kk wm qb">Locaties</h4>
 
                 <ul>
                   <li class="ql vb du-ease-in-out il xl">
-                    <a href="#">Blog</a>
+                    <a href="#">Brussel</a>
                   </li>
                   <li class="ql vb du-ease-in-out il xl">
-                    <a href="#">Events</a>
+                    <a href="#">ST-Truiden</a>
                   </li>
-                  <li class="ql vb du-ease-in-out il xl">
-                    <a href="#">Grids</a>
-                  </li>
-                  <li class="ql vb du-ease-in-out il xl">
-                    <a href="#">News</a>
-                  </li>
-                  <li class="ql vb du-ease-in-out il xl">
-                    <a href="#">Rounded</a>
-                  </li>
+                  
                 </ul>
               </div>
 
               <div class="animate_top">
-                <h4 class="tj kk wm qb">Related Posts</h4>
+                <h4 class="tj kk wm qb">Nieuwtjes</h4>
 
                 <div>
                   <div class="tc fg 2xl:ud-gap-6 qb">
