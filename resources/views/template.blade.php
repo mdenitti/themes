@@ -1,5 +1,13 @@
 @include('partials.header')
+    <style>
+        .border {
+          border: none!important;
+        }
 
+        .bg-white { 
+          background-color: transparent!important;
+        }
+    </style>
     <main>
       <!-- ===== Blog Single Start ===== -->
       <section class="gj qp gr hj rp hr">
