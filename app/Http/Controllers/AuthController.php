@@ -49,6 +49,11 @@ class AuthController extends Controller
 		// @endif
     }
 
+    public function showRegisterForm()
+    {
+        return view('auth.register');
+    }
+
     public function register(Request $request)
     {
         // Validate user input

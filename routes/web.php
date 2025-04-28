@@ -5,6 +5,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\AuthController; // Add this line
 use App\Models\Product;
 use App\Http\Middleware\EnsureUserIsVerified;
+use App\Http\Middleware\IsVerified;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,12 +21,9 @@ Route::get('/testing', function () {
 
 
 // Content routes
-Route::get('/cities', [CityController::class, 'index'])->middleware('auth');
+Route::get('/cities', [CityController::class, 'index'])->middleware(IsVerified::class);
 
 // Dashboard route
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->middleware(EnsureUserIsVerified::class);
 
 Route::get('/about', function () {
     return view('about.index');
