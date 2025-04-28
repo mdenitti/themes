@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\AuthController; // Add this line
 use App\Models\Product;
+use App\Http\Middleware\EnsureUserIsVerified;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,10 +20,20 @@ Route::get('/testing', function () {
 
 
 // Content routes
-Route::get('/cities', [CityController::class, 'index']);
+Route::get('/cities', [CityController::class, 'index'])->middleware('auth');
+
+// Dashboard route
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->middleware(EnsureUserIsVerified::class);
+
 Route::get('/about', function () {
     return view('about.index');
 });
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/themedays', function () {
     return view('themedays.index');
@@ -33,5 +45,5 @@ Route::get('/contact', function () {
 
 
 // Registration Routes
-Route::get('/register', [App\Http\Controllers\AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [App\Http\Controllers\AuthController::class, 'register']);
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register'); // Use the imported class
+Route::post('/register', [AuthController::class, 'register']); // Use the imported class
