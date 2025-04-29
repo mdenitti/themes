@@ -30,7 +30,7 @@ class AuthMiddlewareTest extends TestCase
     {
         // Create user, set admin, and log in
         $user = User::factory()->create();
-        $user->is_admin = true;
+        $user->verified = true;
         $this->actingAs($user);
 
         $response = $this->get('/cities');
