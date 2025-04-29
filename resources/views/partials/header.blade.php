@@ -73,8 +73,16 @@
           </label>
         </div>
 
-        <a href="signin.html" :class="{ 'nk yl' : page === 'home', 'ok' : page === 'home' && stickyMenu }" class="ek pk xl">Sign In</a>
-        <a href="/register" :class="{ 'hh/[0.15]' : page === 'home', 'sh' : page === 'home' && stickyMenu }" class="lk gh dk rg tc wf xf _l gi hi">Sign Up</a>
+       @if(Auth::check())
+    <span id="userGreeting" class="ek pk xl">Hallo, {{ Auth::user()->name }}</span>
+    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+        @csrf
+        <button id="logoutBtn" type="submit" class="lk gh dk rg tc wf xf _l gi hi">Log Out</button>
+    </form>
+@else
+    <a href="{{ route('login') }}" id="signInLink" class="ek pk xl">Sign In</a>
+    <a href="{{ route('register') }}" id="signUpLink" class="lk gh dk rg tc wf xf _l gi hi">Sign Up</a>
+@endif
       </div>
     </div>
   </div>

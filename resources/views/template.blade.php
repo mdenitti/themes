@@ -14,7 +14,7 @@
         <div class="bb ze ki xn 2xl:ud-px-0">
           <div class="tc sf yo zf kq">
             <div class="ro">
-              <div class="animate_top rounded-md shadow-solid-13 bg-white dark:bg-blacksection border border-stroke dark:border-strokedark p-7.5 md:p-10">
+              <div class="rounded-md shadow-solid-13 bg-white dark:bg-blacksection border border-stroke dark:border-strokedark p-7.5 md:p-10">
                
 
                 <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb gb">@yield('title')</h2>
@@ -89,7 +89,7 @@
             </div>
 
             <div class="jn/2 so">
-              <div class="animate_top fb">
+              <div class="fb">
                 <form action="#">
                   <div class="i">
                     <input
@@ -116,7 +116,7 @@
                 </form>
               </div>
 
-              <div class="animate_top fb">
+              <div class="fb">
                 <h4 class="tj kk wm qb">Locaties</h4>
 
                 <ul>
@@ -130,7 +130,7 @@
                 </ul>
               </div>
 
-              <div class="animate_top">
+              <div class="">
                 <h4 class="tj kk wm qb">Nieuwtjes</h4>
 
                 <div>
