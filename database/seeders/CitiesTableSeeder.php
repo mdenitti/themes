@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-// use phpfaker
 use Faker\Factory as Faker;
 
 class CitiesTableSeeder extends Seeder
@@ -16,34 +15,30 @@ class CitiesTableSeeder extends Seeder
      */
     public function run(): void
     {
-       $faker = Faker::create();
+        $faker = Faker::create('nl_BE');
 
-       $continents = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America'];
-       $countries = ['USA', 'Canada', 'Mexico', 'UK', 'France', 'Germany', 'Italy', 'Spain', 'Australia', 'Japan'];
+        $continents = ['Africa', 'Asia', 'Europe', 'North America', 'South America', 'Australia', 'Antarctica'];
+        $countries = ['United States', 'Japan', 'France', 'United Kingdom', 'Australia', 'Canada', 'Germany', 'Italy', 'Spain', 'Brazil'];
 
-       $cities = [];
-
-       for($i = 0; $i < 20; $i++) {
-        $country = $faker->randomElement($countries);
-        $continent = $faker->randomElement($continents);
-        $isCapital = $faker->boolean(20); // 20% change of being a capital
-
-        $cities[] = [
-            'name' => $faker->bankAccountNumber(),
-                'country' => $country,
-                'continent' => $continent,
-                'population' => $faker->numberBetween(100000, 20000000),
+        $cities = [];
+        for ($i = 0; $i < 20; $i++) {
+            $cities[] = [
+                'name' => $faker->city(),
+                'country' => $faker->randomElement($countries),
+                'continent' => $faker->randomElement($continents),
+                'population' => $faker->numberBetween(100000, 10000000),
                 'latitude' => $faker->latitude,
                 'longitude' => $faker->longitude,
                 'known_for' => $faker->sentence(3, true),
-                'founded_year' => $faker->numberBetween(100, 2000),
-                'is_capital' => $isCapital,
-                'annual_tourists' => $faker->numberBetween(500000, 70000000),
+                'founded_year' => $faker->year,
+                'is_capital' => $faker->boolean(20), // 20% chance of being a capital
+                'annual_tourists' => $faker->numberBetween(100000, 50000000),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-        ];
+            ];
+        }
+        DB::table('cities')->insert($cities);
 
-       }
-       DB::table('cities')->insert($cities);
+
     }
 }
