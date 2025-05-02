@@ -14,7 +14,7 @@
                 @endif
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/register') }}">
+                    <form method="POST" action="{{ url('/register')}}" enctype="multipart/form-data">
                         @csrf <!-- This is the CSRF token -->
 
                         <div class="mb-3">
@@ -29,6 +29,14 @@
                             <label for="email" class="form-label">Email Address</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
                             @error('email')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="avatar" class="form-label">Avatar</label>
+                            <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar">
+                            @error('avatar')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>

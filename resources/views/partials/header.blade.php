@@ -74,7 +74,7 @@
         </div>
 
        @if(Auth::check())
-    <span id="userGreeting" class="ek pk xl">Hallo, {{ Auth::user()->name }}</span>
+    <a href="{{ route('profile.show') }}" id="userGreeting" class="ek pk xl">Hallo, {{ Auth::user()->name }}</a>
     <form method="POST" action="{{ route('logout') }}" class="d-inline">
         @csrf
         <button id="logoutBtn" type="submit" class="lk gh dk rg tc wf xf _l gi hi">Log Out</button>
