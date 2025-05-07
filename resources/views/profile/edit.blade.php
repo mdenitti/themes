@@ -5,20 +5,21 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Edit Profile</div>
-
+            {{-- Profile Update Form --}}
+            <div class="card mb-4"> {{-- Added margin bottom --}}
+                <div class="card-header">Edit Profile Information</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT') {{-- Use PUT method for updates --}}
+                        @method('PUT')
 
-                        {{-- Display Current Avatar --}}
+                        {{-- Current Avatar Display --}}
                         <div class="mb-3 text-center">
                             <label class="form-label">Current Avatar</label><br>
                             @if($user->avatar)
                                 <img src="{{ asset('storage/' . $user->avatar) }}" alt="Current Avatar" class="rounded-circle img-thumbnail mb-2" width="100" height="100">
                             @else
+                                {{-- Assuming you have a default avatar image --}}
                                 <img src="{{ asset('images/default-avatar.png') }}" alt="Default Avatar" class="rounded-circle img-thumbnail mb-2" width="100" height="100">
                             @endif
                         </div>
@@ -41,7 +42,7 @@
                             @enderror
                         </div>
 
-                        {{-- Avatar Upload Field --}}
+                        {{-- Single Avatar Upload Field --}}
                         <div class="mb-3">
                             <label for="avatar" class="form-label">Change Avatar (Optional)</label>
                             <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar">
@@ -51,7 +52,7 @@
                             @enderror
                         </div>
 
-                        {{-- Optional: Add Password Fields here if implementing password change --}}
+                        {{-- Password Fields (Optional) --}}
                         {{-- 
                         <hr>
                         <h5>Change Password (Optional)</h5>
@@ -84,6 +85,32 @@
                     </form>
                 </div>
             </div>
+
+            {{-- Travel Image Upload Form --}}
+            <div class="card">
+                <div class="card-header">Upload Travel Images</div>
+                <div class="card-body">
+                    {{-- Point this form to a new route/controller method --}}
+                    <form method="POST" action="{{ route('profile.images.upload') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="images" class="form-label">Select Images</label>
+                            <input id="images" type="file" class="form-control @error('images.*', 'imageUpload') is-invalid @enderror" name="images[]" multiple required> {{-- Added required --}}
+                            <small class="form-text text-muted">You can upload multiple images. Max file size per image: 2MB. Allowed types: jpg, png, gif.</small>
+                            {{-- Use a specific error bag 'imageUpload' to avoid conflicts --}}
+                            @error('images.*', 'imageUpload')
+                                <span class="invalid-feedback d-block">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-success">
+                                Upload Selected Images
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
