@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\File;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeUserMail;
 
 
 class AuthController extends Controller
@@ -78,12 +80,24 @@ class AuthController extends Controller
         }
 
         // Create the user
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'avatar' => $avatarPath, // Save the path! 👇
         ]);
+
+        // Send welcome email
+        Mail::to($user->email)->queue(new WelcomeUserMail($user));
+
+        // send a admin notification email
+        $adminEmail = 'admin@example.com';
+        $subject = 'New User Registration DBV themes';
+        $message = "A new user has registered:\n\nName: {$user->name}\nEmail: {$user->email}";
+        Mail::raw($message, function ($mail) use ($adminEmail, $subject) {
+            $mail->to($adminEmail)
+                ->subject($subject);
+        });
 
         // Redirect to home page with success message
         return redirect('/register')->with('success', 'Registration successful!');

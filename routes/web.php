@@ -12,6 +12,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/storagepath', function () {
+    dd(storage_path('app/public'));
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
