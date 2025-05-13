@@ -116,5 +116,123 @@ class CityController extends Controller
         ], 201);
     }
 
-    // ... other CRUD methods for show, update, and destroy
+    /**
+     * @OA\Get(
+     *     path="/cities/country/{country}",
+     *     summary="Search cities by country",
+     *     operationId="searchCitiesByCountry",
+     *     tags={"Cities"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="country",
+     *         in="path",
+     *         required=true,
+     *         description="Country name to search for",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(type="array", @OA\Items(type="object"))
+     *     ),
+     *     @OA\Response(response=401, description="Unauthenticated"),
+     *     @OA\Response(response=404, description="No cities found")
+     * )
+     */
+    public function searchByCountry(string $country): JsonResponse
+    {
+        $cities = City::where('country', $country)->get();
+        
+        if ($cities->isEmpty()) {
+            return response()->json(['message' => 'No cities found for this country'], 404);
+        }
+        
+        return response()->json($cities);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/cities/continent/{continent}",
+     *     summary="Search cities by continent",
+     *     operationId="searchCitiesByContinent",
+     *     tags={"Cities"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="continent",
+     *         in="path",
+     *         required=true,
+     *         description="Continent name to search for",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(type="array", @OA\Items(type="object"))
+     *     ),
+     *     @OA\Response(response=401, description="Unauthenticated"),
+     *     @OA\Response(response=404, description="No cities found")
+     * )
+     */
+    public function searchByContinent(string $continent): JsonResponse
+    {
+        $cities = City::where('continent', $continent)->get();
+        
+        if ($cities->isEmpty()) {
+            return response()->json(['message' => 'No cities found for this continent'], 404);
+        }
+        
+        return response()->json($cities);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/cities/founded/{year}",
+     *     summary="Get cities founded in a specific year",
+     *     operationId="getCitiesByFoundedYear",
+     *     tags={"Cities"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="year",
+     *         in="path",
+     *         required=true,
+     *         description="Year when cities were founded",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(type="array", @OA\Items(type="object"))
+     *     ),
+     *     @OA\Response(response=401, description="Unauthenticated"),
+     *     @OA\Response(response=404, description="No cities found")
+     * )
+     */
+    public function getCitiesByFoundedYear(int $year): JsonResponse
+    {
+        $cities = City::where('founded_year', $year)->get();
+        
+        if ($cities->isEmpty()) {
+            return response()->json(['message' => 'No cities found for this founding year'], 404);
+        }
+        
+        return response()->json($cities);
+    }
+
+
+    /**
+     * Get all cities founded in the 20th century.
+     *
+     * @return JsonResponse
+     */
+    public function getCitiesIn20thCentury(): JsonResponse
+    {
+        $cities = City::whereBetween('founded_year', [1900, 1999])->get();
+        
+        if ($cities->isEmpty()) {
+            return response()->json(['message' => 'No cities found in the 20th century'], 404);
+        }
+        
+        return response()->json($cities);
+    }
+   
 }

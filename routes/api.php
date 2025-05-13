@@ -19,10 +19,12 @@ Route::middleware('auth:sanctum')->group(function () {
     
     // Cities resource routes
     Route::apiResource('cities', CityController::class);
-});
+    
+    // Custom search routes for cities
+    Route::get('/cities/country/{country}', [CityController::class, 'searchByCountry']);
+    Route::get('/cities/continent/{continent}', [CityController::class, 'searchByContinent']);
+    Route::get('/cities/founded/{year}', [CityController::class, 'getCitiesByFoundedYear']);
 
-// Cookie-based authentication routes
-Route::middleware('web')->group(function () {
-    Route::post('/login', [AuthController::class, 'cookieLogin']);
-    Route::post('/logout', [AuthController::class, 'cookieLogout']);
+    // custom routes get a city in the 20th century
+    Route::get('/cities/20th-century', [CityController::class, 'getCitiesIn20thCentury']);
 });
