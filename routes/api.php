@@ -4,10 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
+// use auth helpers
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 // Public authentication routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -27,4 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // custom routes get a city in the 20th century
     Route::get('/cities/20th-century', [CityController::class, 'getCitiesIn20thCentury']);
+
+
 });
