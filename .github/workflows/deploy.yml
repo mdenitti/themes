@@ -1,0 +1,45 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, bcmath
+          
+      - name: Install Composer dependencies
+        run: composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+          
+      - name: Setup deploy key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan ssh.hellocode.be >> ~/.ssh/known_hosts
+          
+      - name: Deploy to server
+        run: |
+          rsync -avz --exclude '.git/' \
+                     --exclude '.github/' \
+                     --exclude 'node_modules/' \
+                     --exclude '.env' \
+                     --exclude '.env.example' \
+                     ./ hellocodebe@ssh.hellocode.be:/subsites/fullstack.be/
+          
+      - name: Post-deployment commands
+        run: |
+          ssh hellocodebe@ssh.hellocode.be "cd /subsites/fullstack.be && bash post-deploy.sh"

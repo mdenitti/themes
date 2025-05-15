@@ -64,3 +64,42 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Deployment
+
+This project is configured to automatically deploy to production when changes are pushed to the main branch using GitHub Actions.
+
+### Setting up GitHub Actions Deployment
+
+1. Push this repository to GitHub
+2. In your GitHub repository, go to Settings > Secrets and Variables > Actions
+3. Add a new repository secret:
+   - Name: `DEPLOY_SSH_KEY`
+   - Value: Your private SSH key (the contents of your `id_rsa` file)
+
+### How the Deployment Works
+
+The GitHub Actions workflow will:
+1. Check out the code from the repository
+2. Install PHP and composer dependencies
+3. Deploy the code to `/subsites/fullstack.be` on the server using rsync
+4. Run migrations to update the database structure
+
+### Manual Deployment
+
+If you need to deploy manually, you can use the following commands:
+
+```bash
+# From your local machine
+rsync -avz --exclude '.git/' \
+           --exclude '.github/' \
+           --exclude 'node_modules/' \
+           --exclude '.env' \
+           --exclude '.env.example' \
+           ./ hellocodebe@ssh.hellocode.be:/subsites/fullstack.be/
+
+# Then connect to the server and run migrations
+ssh hellocodebe@ssh.hellocode.be "cd /subsites/fullstack.be && php artisan migrate --force"
+```
+
+Make sure you have your SSH keys properly set up before running these commands.
