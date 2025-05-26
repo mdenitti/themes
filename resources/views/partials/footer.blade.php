@@ -185,7 +185,21 @@
     <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
   </svg>
 </button>
-
+  
     <!-- ====== Back To Top End ===== -->
-  <script defer src="{{asset('bundle.js')}}"></script></body>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <script defer src="{{asset('bundle.js')}}"></script>
+  @livewireScripts
+  <script>
+    // Ensure Alpine.js is properly initialized before Livewire uses it
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof window.Alpine !== 'undefined' && typeof window.Alpine.cloneNode === 'undefined') {
+        // Add the missing cloneNode function to Alpine if it doesn't exist
+        window.Alpine.cloneNode = function(node) {
+          return node.cloneNode(true);
+        };
+      }
+    });
+  </script>
+</body>
 </html>

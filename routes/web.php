@@ -58,3 +58,8 @@ Route::get('/contact', function () {
 // Registration Routes
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register'); // Use the imported class
 Route::post('/register', [AuthController::class, 'register']); // Use the imported class
+
+// Luggage Calculator Route
+Route::get('/luggage-calculator', function() {
+    return view('luggage-calculator');
+});
